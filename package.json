@@ -1,0 +1,23 @@
+{
+  "name": "samadhan-task-repository",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Task1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Farhan-Khan7/Samadhan-Task-Repository.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Farhan-Khan7/Samadhan-Task-Repository/issues"
+  },
+  "homepage": "https://github.com/Farhan-Khan7/Samadhan-Task-Repository#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
