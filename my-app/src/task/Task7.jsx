@@ -1,34 +1,70 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-export default function Task7() {
+function TextCounterPreview() {
   const [text, setText] = useState("");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
-      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-lg border border-gray-200">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          ✨ Live Text Preview + Counter ✨
-        </h2>
+    <div
+      style={{
+        maxWidth: "500px",
+        margin: "40px auto",
+        padding: "10px 70px",
+        border: "2px solid #ddd",
+        borderRadius: "12px",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+        fontFamily: "Arial, sans-serif",
+        backgroundColor: "#f9f9f9",
+      }}
+    >
+      <h2 style={{ textAlign: "center", color: "#333" }}>
+        Live Text Preview & Counter
+      </h2>
 
-        {/* Input box */}
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Type something amazing..."
-          className="w-full h-32 border-2 border-gray-200 rounded-xl p-3 text-gray-700 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-300 transition duration-200"
-        />
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Yahan type karein..."
+        style={{
+          width: "100%",
+          height: "120px",
+          padding: "10px",
+          marginTop: "10px",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+          fontSize: "16px",
+          resize: "none",
+        }}
+      />
 
-        {/* Counter */}
-        <p className="mt-3 text-sm text-gray-600 text-right">
-          Characters:{" "}
-          <span className="font-semibold text-purple-600">{text.length}</span>
-        </p>
+      <div
+        style={{
+          marginTop: "10px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <span style={{ fontWeight: "bold", color: "#555" }}>
+          Characters: {text.length}
+        </span>
+        <span style={{ fontStyle: "italic", color: "#777" }}>Live Preview:</span>
+      </div>
 
-        {/* Live Preview */}
-        <div className="mt-6 p-5 border-2 border-dashed rounded-xl bg-gray-50 min-h-[70px] text-gray-700 text-base">
-          {text ? text : "👀 Your text will appear here..."}
-        </div>
+      <div
+        style={{
+          marginTop: "10px",
+          padding: "10px",
+          minHeight: "60px",
+          borderRadius: "8px",
+          backgroundColor: "#fff",
+          border: "1px solid #eee",
+          color: "#333",
+        }}
+      >
+        {text || "Yahan aapka text live preview hoga..."}
       </div>
     </div>
   );
 }
+
+export default TextCounterPreview;
