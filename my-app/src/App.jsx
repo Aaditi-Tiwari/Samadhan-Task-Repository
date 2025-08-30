@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Task6 from "./task/Task6";
 import Task7 from "./task/Task7";
-import Task8 from "./task/Task8"; // 👈 nayi file import
+import Task8 from "./task/Task8";
+import Task9 from "./task/Task9";  // ✅ nayi file import
 
 function App() {
   const [activeTask, setActiveTask] = useState("Task6");
@@ -12,38 +13,19 @@ function App() {
 
       {/* Navigation Buttons */}
       <div className="flex gap-4 justify-center mb-6">
-        <button
-          onClick={() => setActiveTask("Task6")}
-          className={`px-4 py-2 rounded-lg shadow transition ${
-            activeTask === "Task6"
-              ? "bg-blue-600 text-white"
-              : "bg-white hover:bg-blue-100"
-          }`}
-        >
-          Task 6
-        </button>
-
-        <button
-          onClick={() => setActiveTask("Task7")}
-          className={`px-4 py-2 rounded-lg shadow transition ${
-            activeTask === "Task7"
-              ? "bg-blue-600 text-white"
-              : "bg-white hover:bg-blue-100"
-          }`}
-        >
-          Task 7
-        </button>
-
-        <button
-          onClick={() => setActiveTask("Task8")}
-          className={`px-4 py-2 rounded-lg shadow transition ${
-            activeTask === "Task8"
-              ? "bg-blue-600 text-white"
-              : "bg-white hover:bg-blue-100"
-          }`}
-        >
-          Task 8
-        </button>
+        {["Task6", "Task7", "Task8", "Task9"].map((task) => (
+          <button
+            key={task}
+            onClick={() => setActiveTask(task)}
+            className={`px-4 py-2 rounded-lg shadow transition ${
+              activeTask === task
+                ? "bg-blue-600 text-white"
+                : "bg-white hover:bg-blue-100"
+            }`}
+          >
+            {task}
+          </button>
+        ))}
       </div>
 
       {/* Render Selected Task */}
@@ -51,6 +33,7 @@ function App() {
         {activeTask === "Task6" && <Task6 />}
         {activeTask === "Task7" && <Task7 />}
         {activeTask === "Task8" && <Task8 />}
+        {activeTask === "Task9" && <Task9 />}
       </div>
     </div>
   );
