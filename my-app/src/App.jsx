@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Task6 from "./task/Task6";
-import Task7 from "./task/Task7";
-import Task8 from "./task/Task8";
-import Task9 from "./task/Task9";
-import Task10 from "./task/Task_10"; // Clean import (underscore hata diya)
+import Task6 from "./Day2/Task6";
+import Task7 from "./Day2/Task7";
+import Task8 from "./Day2/Task8";
+import Task9 from "./Day2/Task9";
+import Task10 from "./Day2/Task_10"; // Clean import (underscore hata diya)
 
 function App() {
   const [activeTask, setActiveTask] = useState("Task6");
