@@ -9,7 +9,8 @@ function ProfileCard(props) {
       textAlign: "center",
       boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
       margin: "20px auto",
-      backgroundColor: "#fff"
+      backgroundColor: "#fff",
+
     }}>
       <img 
         src={props.image} 

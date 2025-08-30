@@ -14,6 +14,7 @@ function TextCounterPreview() {
         boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
         fontFamily: "Arial, sans-serif",
         backgroundColor: "#f9f9f9",
+        margin: "20px 70px"
       }}
     >
       <h2 style={{ textAlign: "center", color: "#333" }}>
@@ -28,7 +29,7 @@ function TextCounterPreview() {
           width: "100%",
           height: "120px",
           padding: "10px",
-          marginTop: "10px",
+          // marginTop: "10px",
           borderRadius: "8px",
           border: "1px solid #ccc",
           fontSize: "16px",

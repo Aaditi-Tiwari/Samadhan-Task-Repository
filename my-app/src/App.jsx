@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Task6 from "./task/Task6";
 import Task7 from "./task/Task7";
 import Task8 from "./task/Task8";
-import Task9 from "./task/Task9";  // ✅ nayi file import
+import Task9 from "./task/Task9";
+import Task10 from "./task/Task_10"; // Clean import (underscore hata diya)
 
 function App() {
   const [activeTask, setActiveTask] = useState("Task6");
@@ -12,8 +13,8 @@ function App() {
       <h1 className="text-2xl font-bold text-center mb-6">🚀 My React Tasks</h1>
 
       {/* Navigation Buttons */}
-      <div className="flex gap-4 justify-center mb-6">
-        {["Task6", "Task7", "Task8", "Task9"].map((task) => (
+      <div className="flex gap-4 justify-center mb-6 flex-wrap">
+        {["Task6", "Task7", "Task8", "Task9", "Task10"].map((task) => (
           <button
             key={task}
             onClick={() => setActiveTask(task)}
@@ -34,6 +35,7 @@ function App() {
         {activeTask === "Task7" && <Task7 />}
         {activeTask === "Task8" && <Task8 />}
         {activeTask === "Task9" && <Task9 />}
+        {activeTask === "Task10" && <Task10 />}
       </div>
     </div>
   );

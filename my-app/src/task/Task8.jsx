@@ -1,79 +1,175 @@
-// import "./Task8.css";
 import { useState } from "react";
 
 export default function Task8() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
+  
+  // Estados para manejar estilos interactivos (hover, focus, etc.)
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isAddBtnHovered, setIsAddBtnHovered] = useState(false);
+  const [hoveredDeleteBtn, setHoveredDeleteBtn] = useState(null); // Almacena el ID del botón
 
-  // Add task
+  // --- Definición de Estilos ---
+  const styles = {
+    todoApp: {
+      minHeight: '450px',
+      width: '100%',
+      maxWidth: '512px',
+      margin: '2rem auto',
+      padding: '1.5rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      backgroundImage: 'linear-gradient(to bottom right, #fce7f3, #f3e8ff, #e0f2fe)',
+      borderRadius: '1rem',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      fontFamily: 'sans-serif',
+    },
+    todoHeader: {
+      fontSize: '1.875rem',
+      fontWeight: 700,
+      marginBottom: '1.5rem',
+      color: '#374151',
+      filter: 'drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1))',
+    },
+    inputSection: {
+      display: 'flex',
+      gap: '0.5rem',
+      marginBottom: '1.5rem',
+      width: '100%',
+    },
+    taskInput: {
+      flexGrow: 1,
+      border: '2px solid #d1d5db',
+      borderRadius: '0.75rem',
+      padding: '0.5rem 1rem',
+      transition: 'all 0.2s ease-in-out',
+      outline: 'none',
+    },
+    taskInputFocus: { // Estilo para :focus
+      borderColor: '#8b5cf6',
+      boxShadow: '0 0 0 2px #c4b5fd',
+    },
+    addBtn: {
+      padding: '0.5rem 1rem',
+      backgroundColor: '#8b5cf6',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.75rem',
+      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+      cursor: 'pointer',
+      transition: 'all 0.1s ease-in-out',
+    },
+    addBtnHover: { // Estilo para :hover
+      backgroundColor: '#7c3aed',
+    },
+    taskList: {
+      width: '100%',
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.75rem',
+    },
+    noTasksMessage: {
+      color: '#4b5563',
+      textAlign: 'center',
+      fontStyle: 'italic',
+    },
+    taskItem: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: 'white',
+      padding: '1rem',
+      borderRadius: '0.75rem',
+      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+      transition: 'box-shadow 0.2s ease-in-out',
+    },
+    taskText: {
+      flexGrow: 1,
+      cursor: 'pointer',
+      color: '#1f2937',
+      fontWeight: 500,
+    },
+    completedTaskText: { // Estilo para la tarea completada
+      textDecoration: 'line-through',
+      color: '#9ca3af',
+    },
+    deleteBtn: {
+      background: 'none',
+      border: 'none',
+      color: '#ef4444',
+      fontSize: '1.2rem',
+      marginLeft: '1rem',
+      cursor: 'pointer',
+      transition: 'color 0.2s ease-in-out',
+    },
+    deleteBtnHover: { // Estilo para :hover
+        color: '#b91c1c',
+    }
+  };
+  
+  // --- Lógica de Funciones ---
   const addTask = () => {
     if (task.trim() === "") return;
     setTasks([...tasks, { id: Date.now(), text: task, completed: false }]);
     setTask("");
   };
 
-  // Toggle complete
   const toggleComplete = (id) => {
     setTasks(
-      tasks.map((t) =>
-        t.id === id ? { ...t, completed: !t.completed } : t
-      )
+      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
     );
   };
 
-  // Delete task
   const deleteTask = (id) => {
     setTasks(tasks.filter((t) => t.id !== id));
   };
 
+  // --- Renderizado ---
   return (
-    <div className="min-h-[450px] flex flex-col items-center justify-start bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 rounded-2xl shadow-lg p-6 w-full max-w-lg">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800 drop-shadow">
-        📝 To-Do List
-      </h2>
+    <div style={styles.todoApp}>
+      <h2 style={styles.todoHeader}>📝 To-Do List</h2>
 
-      {/* Input + Button */}
-      <div className="flex gap-2 mb-6 w-full">
+      <div style={styles.inputSection}>
         <input
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
           placeholder="Enter your task..."
-          className="flex-1 border-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-300 transition duration-200"
+          style={isInputFocused ? { ...styles.taskInput, ...styles.taskInputFocus } : styles.taskInput}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
         />
         <button
+          style={isAddBtnHovered ? { ...styles.addBtn, ...styles.addBtnHover } : styles.addBtn}
+          onMouseEnter={() => setIsAddBtnHovered(true)}
+          onMouseLeave={() => setIsAddBtnHovered(false)}
           onClick={addTask}
-          className="px-4 py-2 bg-purple-600 text-white rounded-xl shadow hover:bg-purple-700 active:scale-95 transition"
         >
           ➕ Add
         </button>
       </div>
 
-      {/* Task List */}
-      <ul className="w-full space-y-3">
+      <ul style={styles.taskList}>
         {tasks.length === 0 && (
-          <p className="text-gray-600 text-center italic">
-            No tasks yet. Add one!
-          </p>
+          <p style={styles.noTasksMessage}>No tasks yet. Add one!</p>
         )}
         {tasks.map((t) => (
-          <li
-            key={t.id}
-            className="flex justify-between items-center bg-white p-4 rounded-xl shadow hover:shadow-md transition"
-          >
+          <li key={t.id} style={styles.taskItem}>
             <span
               onClick={() => toggleComplete(t.id)}
-              className={`flex-1 cursor-pointer ${
-                t.completed
-                  ? "line-through text-gray-400"
-                  : "text-gray-800 font-medium"
-              }`}
+              style={t.completed ? { ...styles.taskText, ...styles.completedTaskText } : styles.taskText}
             >
               {t.text}
             </span>
             <button
               onClick={() => deleteTask(t.id)}
-              className="text-red-500 hover:text-red-700 font-bold ml-4"
+              style={hoveredDeleteBtn === t.id ? { ...styles.deleteBtn, ...styles.deleteBtnHover } : styles.deleteBtn}
+              onMouseEnter={() => setHoveredDeleteBtn(t.id)}
+              onMouseLeave={() => setHoveredDeleteBtn(null)}
             >
               ❌
             </button>
